@@ -1,3 +1,5 @@
+using BookStoreApp.Svc.Data;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,9 @@ builder.Host.UseSerilog((context, config) =>
 {
   config.WriteTo.Console().ReadFrom.Configuration(context.Configuration);
 });
+
+var connectionString = builder.Configuration.GetConnectionString("BookStoreDbConnection");
+builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddCors(options => 
 {
