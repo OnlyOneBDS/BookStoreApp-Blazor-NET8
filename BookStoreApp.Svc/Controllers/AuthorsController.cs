@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStoreApp.Svc.Data;
 using BookStoreApp.Svc.DTOs.Author;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace BookStoreApp.Svc.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize]
   public class AuthorsController : ControllerBase
   {
     private readonly BookStoreDbContext _context;
@@ -48,6 +50,7 @@ namespace BookStoreApp.Svc.Controllers
     // PUT: api/Authors/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> PutAuthor(int id, AuthorUpdateDto authorDto)
     {
       if (id != authorDto.Id)
@@ -87,6 +90,7 @@ namespace BookStoreApp.Svc.Controllers
     // POST: api/Authors
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<Author>> PostAuthor(AuthorCreateDto authorDto)
     {
       var author = _mapper.Map<Author>(authorDto);
@@ -99,6 +103,7 @@ namespace BookStoreApp.Svc.Controllers
 
     // DELETE: api/Authors/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteAuthor(int id)
     {
       var author = await _context.Authors.FindAsync(id);

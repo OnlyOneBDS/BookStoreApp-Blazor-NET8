@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BookStoreApp.Svc.Data;
 using BookStoreApp.Svc.DTOs.Book;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace BookStoreApp.Svc.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
+  [Authorize]
   public class BooksController : ControllerBase
   {
     private readonly BookStoreDbContext _context;
@@ -54,6 +56,7 @@ namespace BookStoreApp.Svc.Controllers
     // PUT: api/Books/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> PutBook(int id, BookUpdateDto bookDto)
     {
       if (id != bookDto.Id)
@@ -93,6 +96,7 @@ namespace BookStoreApp.Svc.Controllers
     // POST: api/Books
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<Book>> PostBook(BookCreateDto bookDto)
     {
       var book = _mapper.Map<Book>(bookDto);
@@ -105,6 +109,7 @@ namespace BookStoreApp.Svc.Controllers
 
     // DELETE: api/Books/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     public async Task<IActionResult> DeleteBook(int id)
     {
       var book = await _context.Books.FindAsync(id);

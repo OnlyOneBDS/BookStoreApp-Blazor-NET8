@@ -2,6 +2,7 @@
 using BookStoreApp.Svc.Data;
 using BookStoreApp.Svc.DTOs.Author;
 using BookStoreApp.Svc.DTOs.Book;
+using BookStoreApp.Svc.DTOs.User;
 
 namespace BookStoreApp.Svc.Configurations;
 
@@ -21,5 +22,7 @@ public class MapperConfig : Profile
       .ReverseMap();
     CreateMap<BookCreateDto, Book>().ReverseMap();
     CreateMap<BookUpdateDto, Book>().ReverseMap();
+
+    CreateMap<ApiUser, RegisterDto>().ReverseMap();
   }
 }
