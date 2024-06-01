@@ -1,0 +1,40 @@
+﻿@page "/register"
+
+<h3>Register</h3>
+
+@if (!string.IsNullOrEmpty(message))
+{
+  <div class="alert alert-danger">
+    <p>@message</p>
+  </div>
+}
+
+<div class="card-body">
+  <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+      <label for="firstName">First Name</label>
+      <InputText class="form-control" @bind-Value="RegisterModel.FirstName" />
+      <ValidationMessage For="@(() => RegisterModel.FirstName)" />
+    </div>
+    <div class="mb-3">
+      <label for="lastName">Last Name</label>
+      <InputText class="form-control" @bind-Value="RegisterModel.LastName" />
+      <ValidationMessage For="@(() => RegisterModel.LastName)" />
+    </div>
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <InputText class="form-control" @bind-Value="RegisterModel.Email" />
+      <ValidationMessage For="@(() => RegisterModel.Email)" />
+    </div>
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <InputText class="form-control" @bind-Value="RegisterModel.Password"  type="password" />
+      <ValidationMessage For="@(() => RegisterModel.Password)" />
+    </div>
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+  </EditForm>
+</div>

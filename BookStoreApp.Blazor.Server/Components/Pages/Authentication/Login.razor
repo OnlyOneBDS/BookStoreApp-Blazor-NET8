@@ -1,0 +1,23 @@
+﻿@page "/login"
+
+<h3>Login</h3>
+
+<div class="card-body">
+  <EditForm Model="LoginModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />    
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <InputText class="form-control" @bind-Value="LoginModel.Email" />
+      <ValidationMessage For="@(() => LoginModel.Email)" />
+    </div>
+    <div class="mb-3">
+      <label for="password">Password</label>
+      <InputText class="form-control" @bind-Value="LoginModel.Password" type="password" />
+      <ValidationMessage For="@(() => LoginModel.Password)" />
+    </div>
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </EditForm>
+</div>

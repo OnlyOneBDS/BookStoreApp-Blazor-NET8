@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BookStoreApp.Blazor.Server.styles.css" />
+    <HeadOutlet @rendermode="new InteractiveServerRenderMode(false)" />
+  </head>
+  <body>
+    <Routes @rendermode="new InteractiveServerRenderMode(false)" />
+    <script src="_framework/blazor.web.js"></script>
+  </body>
+</html>
